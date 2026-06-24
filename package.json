@@ -32,7 +32,16 @@
     "plugin",
     "analytics"
   ],
+  "author": "divstechnologydev (https://github.com/divstechnologydev)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divstechnologydev/moveo-one-segment-destination-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/divstechnologydev/moveo-one-segment-destination-web/issues"
+  },
+  "homepage": "https://github.com/divstechnologydev/moveo-one-segment-destination-web#readme",
   "peerDependencies": {
     "@segment/analytics-next": ">=1"
   },
