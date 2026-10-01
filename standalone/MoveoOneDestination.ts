@@ -442,7 +442,7 @@ type SendResult =
 export class MoveoOneDestination implements Plugin {
   readonly name = "Moveo One";
   readonly type = "enrichment" as const;
-  readonly version = "1.0.0";
+  readonly version = "1.1.0";
 
   private readonly options: ResolvedOptions;
 
