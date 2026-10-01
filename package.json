@@ -1,11 +1,13 @@
 {
   "name": "moveo-one-segment-destination-web",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Segment (analytics-next) destination plugin that forwards every Segment event to Moveo One, so both platforms receive identical event data from a single instrumentation.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "unpkg": "./dist/index.global.js",
+  "jsdelivr": "./dist/index.global.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

@@ -4,9 +4,10 @@ A Segment destination plugin that forwards every Segment event to Moveo One, so 
 
 Built for Segment's [`@segment/analytics-next`](https://github.com/segmentio/analytics-next) browser SDK.
 
-Two ways to use it:
+Three ways to use it:
 
 - **npm package** — `npm install moveo-one-segment-destination-web` (see below).
+- **Script tag** — for sites that load Segment with the JavaScript snippet and have no build step. See [Usage with the Segment snippet](#usage-with-the-segment-snippet-script-tag).
 - **Copy-paste single file** — drop [`standalone/MoveoOneDestination.ts`](standalone/MoveoOneDestination.ts) into your project, no dependency to install. See [standalone/README.md](standalone/README.md).
 
 ---
@@ -37,6 +38,29 @@ export const analytics = AnalyticsBrowser.load({ writeKey: "YOUR_SEGMENT_WRITE_K
 
 analytics.register(moveoOneDestination({ apiKey: "YOUR_MOVEO_API_KEY" }));
 ```
+
+---
+
+## Usage with the Segment snippet (script tag)
+
+If your site loads Segment with the JavaScript snippet instead of the npm SDK, add these two tags directly after the snippet:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/moveo-one-segment-destination-web@1/dist/index.global.js"></script>
+<script>
+  analytics.register(
+    MoveoOneSegment.moveoOneDestination({ apiKey: "YOUR_MOVEO_API_KEY" })
+  );
+</script>
+```
+
+Every `track`, `page`, `screen`, `identify`, `group`, and `alias` call is then forwarded to Moveo One. All [configuration](#configuration) options work the same way.
+
+- **Do not add `async` or `defer`** to the first tag. The second tag needs `MoveoOneSegment` to exist when it runs. If your first page view is missing in Moveo One, move the first tag above the Segment snippet.
+- **Custom global name.** If your snippet stores Segment under another name, call `register` on that object, for example `window.myAnalytics.register(...)`.
+- **Older snippets.** `register` must be in the snippet's method list (snippet 5.x). If it is not, update your snippet from the Segment dashboard.
+- **Content Security Policy.** Allow `https://cdn.jsdelivr.net` in `script-src` and `https://api.moveo.one` in `connect-src`.
+- **Self-hosting.** You can copy `dist/index.global.js` to your own server and point the first tag at it instead of the CDN.
 
 ---
 
@@ -132,6 +156,6 @@ moveoOneDestination({
 
 ```bash
 npm install
-npm run build      # bundles ESM + CJS + type declarations into dist/
+npm run build      # bundles ESM + CJS + script-tag build (index.global.js) + type declarations into dist/
 npm run typecheck  # type-checks without emitting
 ```
